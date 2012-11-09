@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  discount: 1.5
+  multiply: false
+  active_until: 2012-11-08
+
+two:
+  name: MyString
+  discount: 1.5
+  multiply: false
+  active_until: 2012-11-08
