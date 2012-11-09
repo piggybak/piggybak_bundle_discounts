@@ -12,7 +12,9 @@ module PiggybakBundleDiscounts
             field :name
             field :multiply
             field :discount
-            field :sellables
+            field :sellables do
+              partial 'piggybak_bundle_discounts/sellables'
+            end
             field :active_until
           end
 

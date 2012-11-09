@@ -1,0 +1,9 @@
+- @sellables = Piggybak::Sellable.all
+= hidden_field_tag "piggybak_bundle_discounts_bundle_discount[sellable_ids][]", "" 
+
+- @sellables.each do |sellable|
+  %span{:style => "display:block"} 
+    = check_box_tag "piggybak_bundle_discounts_bundle_discount[sellable_ids][]", sellable.id, @object.sellables.include?(sellable), :id => "bundle_discount_sellable_ids_#{sellable.id}"
+    = sellable.sku
+
+
