@@ -24,7 +24,7 @@ module PiggybakBundleDiscounts
     initializer "piggybak_bundle_discounts.rails_admin_config" do |app|
       RailsAdmin.config do |config|
         config.model PiggybakBundleDiscounts::BundleDiscount do
-          navigation_label "Orders"
+          navigation_label "Extensions"
           label "Bundle Discounts"
         
           edit do
