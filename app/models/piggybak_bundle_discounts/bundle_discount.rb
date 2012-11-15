@@ -14,45 +14,22 @@ module PiggybakBundleDiscounts
        discounts.sort_by(&:discount).last
     end
     
-    def self.sellables_match_bundle_discount?(bundle_discount, sellables)
-      bundle_discount_sellables =  bundle_discount.sellables.map(&:id)
-      if bundle_discount_sellables.empty?
+    def sellables_match_bundle_discount?(order_sellables)
+      if sellables.empty?
         return nil
       else
-        #Do the items on the order match the bundle discount?
-        (bundle_discount_sellables - sellables).empty? ? true : false
+        #Do the bundle's sellables match the order's sellables
+        (sellables - order_sellables).empty? ? true : false
       end
     end
     
-    def self.applicable_bundle_discounts(sellables)
+    def self.applicable_bundle_discounts(order_sellables)
       bundle_discounts = []
       PiggybakBundleDiscounts::BundleDiscount.active.each do |bd|
-        bundle_discounts << bd if sellables_match_bundle_discount?(bd, sellables)
+        bundle_discounts << bd if bd.sellables_match_bundle_discount?(order_sellables)
       end
-      filter_discounts(bundle_discounts,sellables)
+      get_max_discount(bundle_discounts) if bundle_discounts.present?
     end
     
-    
-    def self.filter_discounts(bundle_discounts,sellables)
-      
-      overlapping_bundles = []
-      filtered_discounts = {}
- 
-      sellables.each do |s|
-        bundle_discounts.each do |b|
-          overlapping_bundles << b if b.sellables.map(&:id).include?(s)
-        end
-        
-        if overlapping_bundles.count > 1
-          filtered_discounts.merge!(s => get_max_discount(overlapping_bundles))
-        end
-      end
-      
-      if filtered_discounts.empty?
-        return bundle_discounts
-      else 
-        return filtered_discounts.values.uniq!
-      end
-    end
   end
 end
