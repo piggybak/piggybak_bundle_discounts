@@ -19,13 +19,6 @@ var piggybak_bundle_discounts = {
 					$("#bundle_discount_total").html('-$' + (parseFloat(data.amount)).toFixed(2));
 					$("#bundle_discount_row").show();
 					piggybak.update_totals();
-				} else {
-					if($('#coupon_code').val() != '') {
-						$('#coupon_response').html(data.message).show();
-					}
-					$('#coupon_application_total').html('$0.00');
-					$('#coupon_application_row').hide();
-					piggybak.update_totals();
 				}
 			}
 		});
