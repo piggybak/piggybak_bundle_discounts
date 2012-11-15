@@ -10,8 +10,8 @@ module PiggybakBundleDiscounts
     validates_presence_of :discount, :name  
     
     def self.get_max_discount(discounts)
-       raise "No bundle discounts to evaluate" if ids.nil? || ids.empty?
-       discounts.sort_by(&:discount).first
+       raise "No bundle discounts to evaluate" if discounts.nil? || discounts.empty?
+       discounts.sort_by(&:discount).last
     end
     
     def self.sellables_match_bundle_discount?(bundle_discount, sellables)
@@ -29,8 +29,30 @@ module PiggybakBundleDiscounts
       PiggybakBundleDiscounts::BundleDiscount.active.each do |bd|
         bundle_discounts << bd if sellables_match_bundle_discount?(bd, sellables)
       end
-      bundle_discounts
+      filter_discounts(bundle_discounts,sellables)
     end
-
+    
+    
+    def self.filter_discounts(bundle_discounts,sellables)
+      
+      overlapping_bundles = []
+      filtered_discounts = {}
+ 
+      sellables.each do |s|
+        bundle_discounts.each do |b|
+          overlapping_bundles << b if b.sellables.map(&:id).include?(s)
+        end
+        
+        if overlapping_bundles.count > 1
+          filtered_discounts.merge!(s => get_max_discount(overlapping_bundles))
+        end
+      end
+      
+      if filtered_discounts.empty?
+        return bundle_discounts
+      else 
+        return filtered_discounts.values.uniq!
+      end
+    end
   end
 end

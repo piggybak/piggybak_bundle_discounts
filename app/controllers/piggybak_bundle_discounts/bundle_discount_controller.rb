@@ -6,7 +6,8 @@ module PiggybakBundleDiscounts
       discounts = ::PiggybakBundleDiscounts::BundleDiscount.applicable_bundle_discounts(sellables)
       
       if discounts.present?
-        render :json => { :bundle_discount => true, :amount => discounts.first.discount }
+        amount = discounts.map(&:discount).inject{|sum,d| sum + d }   
+        render :json => { :bundle_discount => true, :amount => amount }
       else
         render :json => { :bundle_discount => false }
       end
