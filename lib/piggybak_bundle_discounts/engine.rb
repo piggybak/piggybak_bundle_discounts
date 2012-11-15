@@ -4,8 +4,13 @@ module PiggybakBundleDiscounts
   class Engine < ::Rails::Engine
     isolate_namespace PiggybakBundleDiscounts
     
+    config.to_prepare do
+       Piggybak::Order.send(:include, ::PiggybakBundleDiscounts::OrderDecorator)
+    end
+    
     config.before_initialize do
       Piggybak.config do |config|
+        config.extra_secure_paths << "/apply_bundle_discount"
         config.line_item_types[:bundle_discount] = { :visible => true,
                                                         :allow_destroy => true,
                                                         :fields => ["bundle_discount"],
@@ -17,8 +22,9 @@ module PiggybakBundleDiscounts
       end
     end
     
-    config.to_prepare do
-      Piggybak::Order.send(:include, ::PiggybakBundleDiscounts::OrderDecorator)
+    initializer "piggybak_bundle_discounts.precompile_hook" do |app|
+      app.config.assets.precompile += ['piggybak_bundle_discounts/piggybak_bundle_discounts.js']
+      puts app.config.assets.inspect
     end
 
     initializer "piggybak_bundle_discounts.rails_admin_config" do |app|
@@ -31,10 +37,21 @@ module PiggybakBundleDiscounts
             field :name
             field :multiply
             field :discount
-            field :sellables do
-              partial 'piggybak_bundle_discounts/sellables'
-            end
+            field :bundle_discount_sellables
             field :active_until
+          end
+
+        end
+        
+        config.model PiggybakBundleDiscounts::BundleDiscountSellable do
+          visible false
+        
+          edit do
+            field :sellable do
+              label "Sellable"
+              help "Required"
+            end
+
           end
 
         end

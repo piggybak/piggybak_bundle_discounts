@@ -9,7 +9,7 @@ class CreateBundleDiscounts < ActiveRecord::Migration
       t.timestamps
     end
     
-    create_table :bundle_discounts_sellables, :id => :false do |t|
+    create_table :bundle_discount_sellables do |t|
       t.integer :bundle_discount_id
       t.integer :sellable_id
     end
@@ -17,6 +17,6 @@ class CreateBundleDiscounts < ActiveRecord::Migration
 
   def down
     drop_table :bundle_discounts
-    drop_table :bundle_discounts_sellables
+    drop_table :bundle_discount_sellables
   end
 end
