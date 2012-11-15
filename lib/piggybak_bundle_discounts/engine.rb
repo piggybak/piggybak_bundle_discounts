@@ -35,8 +35,11 @@ module PiggybakBundleDiscounts
         
           edit do
             field :name
-            field :multiply
+            field :multiply do 
+              help "Optional"
+            end 
             field :discount
+            field :active_until
             field :bundle_discount_sellables do 
               active true
               label "Sellables"
