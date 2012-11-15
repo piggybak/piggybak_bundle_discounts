@@ -7,17 +7,14 @@ require "piggybak_bundle_discounts/version"
 Gem::Specification.new do |s|
   s.name        = "piggybak_bundle_discounts"
   s.version     = PiggybakBundleDiscounts::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of PiggybakBundleDiscounts."
-  s.description = "TODO: Description of PiggybakBundleDiscounts."
+  s.authors     = ["Barrett Griffith, Steph Skardal"]
+  s.email       = ["piggybak@endpoint.com"]
+  s.homepage    = "http://www.piggybak.org/"
+  s.summary     = "Bundle Discount Support in Piggybak."
+  s.description = "Bundle Discount Support in Piggybak."
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.8"
-  # s.add_dependency "jquery-rails"
-
-  s.add_development_dependency "sqlite3"
 end
