@@ -22,9 +22,9 @@ module PiggybakBundleDiscounts
       end
     end
     
-    def self.applicable_bundle_discounts(order_sellables)
+    def self.applicable_bundle_discounts(sellables)
       # Selecting applicable bundle discounts
-      bundle_discounts = PiggybakBundleDiscounts::BundleDiscount.active.select { |bd| bd.sellables_match_bundle_discount?(order_sellables) }
+      bundle_discounts = self.active.select { |bd| bd.sellables_match_bundle_discount?(sellables) }
 
       # Returning max bundle discount
       bundle_discounts.present? ? bundle_discounts.sort_by(&:discount).last : nil
