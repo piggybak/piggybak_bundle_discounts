@@ -18,6 +18,7 @@ var piggybak_bundle_discounts = {
 					//update totals
 					$("#bundle_discount_total").html('-$' + (parseFloat(data.amount)).toFixed(2));
 					$("#bundle_discount_row").show();
+					piggybak.update_tax();
 					piggybak.update_totals();
 				}
 			}

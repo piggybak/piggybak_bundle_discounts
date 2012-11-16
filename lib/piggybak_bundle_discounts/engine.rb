@@ -15,6 +15,7 @@ module PiggybakBundleDiscounts
         config.line_item_types[:bundle_discount] = { :visible => false,
                                                      :allow_destroy => false,
                                                      :fields => [],
+                                                     :reduce_tax_subtotal => true,
                                                      :class_name => "::PiggybakBundleDiscounts::BundleDiscount",
                                                      :display_in_cart => "Bundle Discount",
                                                      :sort => config.line_item_types[:payment][:sort]
