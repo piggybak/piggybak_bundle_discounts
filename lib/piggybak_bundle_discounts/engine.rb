@@ -25,7 +25,6 @@ module PiggybakBundleDiscounts
     
     initializer "piggybak_bundle_discounts.precompile_hook" do |app|
       app.config.assets.precompile += ['piggybak_bundle_discounts/piggybak_bundle_discounts.js']
-      puts app.config.assets.inspect
     end
 
     initializer "piggybak_bundle_discounts.rails_admin_config" do |app|
