@@ -1,10 +1,7 @@
-PiggybakGiftcerts Gem (Engine)
+PiggybakBundleDiscounts Gem (Engine)
 ========
 
-ADD
-
-CanCan access must be updated to allow admin access to view Gift Certificates.
-
+Bundle Discount Support for Piggybak
 
 TODO
 ========
@@ -14,4 +11,4 @@ TODO
 Copyright
 ========
 
-Copyright (c) 2011 End Point & Steph Skardal. See LICENSE for further details.
+Copyright (c) 2012 End Point. See LICENSE for further details.
