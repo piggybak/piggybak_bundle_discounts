@@ -24,7 +24,7 @@ module PiggybakBundleDiscounts
       end
     end
     
-    initializer "piggybak_bundle_discounts.precompile_hook" do |app|
+    initializer "piggybak_bundle_discounts.precompile_hook", :group => :all do |app|
       app.config.assets.precompile += ['piggybak_bundle_discounts/piggybak_bundle_discounts.js']
     end
 
