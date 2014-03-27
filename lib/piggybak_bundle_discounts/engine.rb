@@ -23,11 +23,11 @@ module PiggybakBundleDiscounts
         config.line_item_types[:payment][:sort] += 1
       end
     end
-    
-    initializer "piggybak_bundle_discounts.precompile_hook", :group => :all do |app|
-      app.config.assets.precompile += ['piggybak_bundle_discounts/piggybak_bundle_discounts.js']
-    end
 
+    initializer "piggybak_bundle_discounts.assets.precompile" do |app|
+      app.config.assets.precompile += ['piggybak_bundle_discounts/piggybak_bundle_discounts-application.js']
+    end
+    
     initializer "piggybak_bundle_discounts.rails_admin_config" do |app|
       RailsAdmin.config do |config|
         config.model PiggybakBundleDiscounts::BundleDiscountSellable do

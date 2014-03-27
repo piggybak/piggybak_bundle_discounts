@@ -1,8 +1,8 @@
 $(function(){
-	$(document).ready(function() {
-		piggybak_bundle_discounts.apply_bundle_discount();
-	});
-	
+	if($('form#new_order').size() == 0) {
+		return;
+	}
+	piggybak_bundle_discounts.apply_bundle_discount();
 });
 
 var piggybak_bundle_discounts = {

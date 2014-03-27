@@ -1,14 +1,11 @@
 module PiggybakBundleDiscounts
   class BundleDiscount < ActiveRecord::Base
-    self.table_name = 'bundle_discounts'
-
     scope :active, where("active_until IS NULL OR active_until > ?", DateTime.now)
 
     has_many :bundle_discount_sellables, :dependent => :destroy
     has_many :sellables, :through => :bundle_discount_sellables, :class_name => "::Piggybak::Sellable"
 
     accepts_nested_attributes_for :bundle_discount_sellables, :allow_destroy => true
-    attr_accessible :active_until, :discount, :multiply, :name, :sellable_ids, :bundle_discount_sellables_attributes
 
     validates_presence_of :discount, :name  
     validates_numericality_of :discount, :greater_than_or_equal_to => 0

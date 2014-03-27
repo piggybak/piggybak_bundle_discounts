@@ -1,3 +1,3 @@
 PiggybakBundleDiscounts::Engine.routes.draw do
-  match "/apply_bundle_discount" => "bundle_discount#apply"
+  get "/apply_bundle_discount" => "bundle_discount#apply"
 end
