@@ -1,6 +1,6 @@
 module PiggybakBundleDiscounts
   class BundleDiscount < ActiveRecord::Base
-    scope :active, where("active_until IS NULL OR active_until > ?", DateTime.now)
+    scope :active, -> { where("active_until IS NULL OR active_until > ?", DateTime.now) }
 
     has_many :bundle_discount_sellables, :dependent => :destroy
     has_many :sellables, :through => :bundle_discount_sellables, :class_name => "::Piggybak::Sellable"
